@@ -1,0 +1,36 @@
+databaseChangeLog:
+
+- changeSet:
+      id:  create-table-user
+      author:  author
+      comment: first migration
+      changes:
+       - createTable:
+            tableName:  user
+            columns:
+              - column:
+                  name:  id
+                  type:  int
+                  autoIncrement:  true
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+              - column:
+                  name:  amount
+                  type:  int
+                  constraints:
+                    nullable:  false
+- changeSet:
+      id:  insert-table-user
+      author:  author
+      changes:
+       - insert:
+            tableName:  user
+            columns:
+              - column:
+                  name:  id
+                  value:  1
+              - column:
+                  name:  amount
+                  value:  2000
+                  
