@@ -1,28 +1,28 @@
-volumes:
-  demo1:
 
 services:
   app:
-    build:
-      dockerfile: Dockerfile
-    container_name: openjdk
-    ports:
-      - "8080:8080"
+    image: emjas/demoexample1
+    volumes:
+      - ./:/app
+    container_name: app
     depends_on:
-      - postgres
+      - db
     environment:
-      SPRING_DATASOURCE_URL: 'jdbc:postgresql://postgres:5432/dbtest'
-
-  postgres:
-    image: postgres:16-alpine
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/dbtest
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+  db:
+    image: postgres:16
     container_name: postgres16
     environment:
       - POSTGRES_DB=dbtest
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
     volumes:
-      - demo1:/lib/postgres/data
+      - ./:/app
     ports:
       - 5432
+
+
 
 
